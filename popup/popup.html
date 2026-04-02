@@ -50,10 +50,48 @@
       </select>
       <select id="sizeFilter" class="filter-select">
         <option value="all">All sizes</option>
-        <option value="large">Large (>500px)</option>
+        <option value="large">Large (&gt;500px)</option>
         <option value="medium">Medium (100-500px)</option>
-        <option value="small">Small (<100px)</option>
+        <option value="small">Small (&lt;100px)</option>
       </select>
+    </div>
+
+    <!-- Icon filter + View toggle -->
+    <div class="controls-bar">
+      <label class="filter-checkbox">
+        <input type="checkbox" id="hideIconsFilter" checked>
+        <span class="filter-checkbox__label">Hide icons &amp; logos</span>
+      </label>
+      <div class="view-toggle">
+        <button id="viewCompact" class="btn-icon btn-view" title="Compact grid" aria-label="Compact grid">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+            <rect x="1" y="1" width="3.5" height="3.5" rx="0.5"/>
+            <rect x="6.25" y="1" width="3.5" height="3.5" rx="0.5"/>
+            <rect x="11.5" y="1" width="3.5" height="3.5" rx="0.5"/>
+            <rect x="1" y="6.25" width="3.5" height="3.5" rx="0.5"/>
+            <rect x="6.25" y="6.25" width="3.5" height="3.5" rx="0.5"/>
+            <rect x="11.5" y="6.25" width="3.5" height="3.5" rx="0.5"/>
+            <rect x="1" y="11.5" width="3.5" height="3.5" rx="0.5"/>
+            <rect x="6.25" y="11.5" width="3.5" height="3.5" rx="0.5"/>
+            <rect x="11.5" y="11.5" width="3.5" height="3.5" rx="0.5"/>
+          </svg>
+        </button>
+        <button id="viewComfortable" class="btn-icon btn-view active" title="Comfortable grid" aria-label="Comfortable grid">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+            <rect x="1" y="1" width="6" height="6" rx="1"/>
+            <rect x="9" y="1" width="6" height="6" rx="1"/>
+            <rect x="1" y="9" width="6" height="6" rx="1"/>
+            <rect x="9" y="9" width="6" height="6" rx="1"/>
+          </svg>
+        </button>
+        <button id="viewList" class="btn-icon btn-view" title="List view" aria-label="List view">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+            <rect x="1" y="2" width="14" height="2.5" rx="0.5"/>
+            <rect x="1" y="6.75" width="14" height="2.5" rx="0.5"/>
+            <rect x="1" y="11.5" width="14" height="2.5" rx="0.5"/>
+          </svg>
+        </button>
+      </div>
     </div>
 
     <!-- Image Grid -->
@@ -75,6 +113,12 @@
         <span id="downloadText">Download Selected</span>
       </button>
     </footer>
+  </div>
+
+  <!-- Hover Preview -->
+  <div id="hoverPreview" class="hover-preview" hidden>
+    <img id="hoverPreviewImg" class="hover-preview__img" alt="Preview">
+    <span id="hoverPreviewInfo" class="hover-preview__info"></span>
   </div>
 
   <script src="popup.js"></script>
