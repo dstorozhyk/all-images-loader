@@ -1,0 +1,33 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Create extension zip
+        run: |
+          zip -r all-images-loader-${{ github.ref_name }}.zip \
+            manifest.json \
+            popup/ \
+            content/ \
+            background/ \
+            icons/ \
+            README.md \
+            LICENSE
+
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          files: all-images-loader-${{ github.ref_name }}.zip
+          generate_release_notes: true
