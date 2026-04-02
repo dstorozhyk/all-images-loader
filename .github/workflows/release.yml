@@ -4,6 +4,12 @@ on:
   push:
     tags:
       - 'v*'
+  workflow_dispatch:
+    inputs:
+      version:
+        description: 'Release version (e.g. v1.0.0)'
+        required: true
+        default: 'v1.0.0'
 
 permissions:
   contents: write
@@ -15,9 +21,18 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
+      - name: Set version
+        id: version
+        run: |
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+            echo "version=${{ github.event.inputs.version }}" >> "$GITHUB_OUTPUT"
+          else
+            echo "version=${{ github.ref_name }}" >> "$GITHUB_OUTPUT"
+          fi
+
       - name: Create extension zip
         run: |
-          zip -r all-images-loader-${{ github.ref_name }}.zip \
+          zip -r all-images-loader-${{ steps.version.outputs.version }}.zip \
             manifest.json \
             popup/ \
             content/ \
@@ -29,5 +44,6 @@ jobs:
       - name: Create GitHub Release
         uses: softprops/action-gh-release@v2
         with:
-          files: all-images-loader-${{ github.ref_name }}.zip
+          tag_name: ${{ steps.version.outputs.version }}
+          files: all-images-loader-${{ steps.version.outputs.version }}.zip
           generate_release_notes: true
